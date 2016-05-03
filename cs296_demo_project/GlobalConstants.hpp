@@ -12,6 +12,7 @@
 #include <stdio.h>
 
 const sf::Vector2i screenDimensions(750, 1334);
-const sf::Time frameRate = sf::seconds(1.0f / 30.0f);
+const float fps = 60.f;
+const sf::Time frameRate = sf::seconds(1.0f / fps);
 
 #endif /* GlobalConstants_hpp */

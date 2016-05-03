@@ -142,12 +142,12 @@ int main(int, char const**)
             window.draw(mainAircraft);
         }
         
-        if (frameCounter <= 15)
-            backgroundSprite.setColor(sf::Color(255, 255, 255, 255 * frameCounter / 15.f));
+        if (frameCounter <= fps / 2)
+            backgroundSprite.setColor(sf::Color(255, 255, 255, 255 * frameCounter / (fps / 2)));
         else
-            backgroundSprite.setColor(sf::Color(255, 255, 255, 255 * (1 - frameCounter / 15.f)));
+            backgroundSprite.setColor(sf::Color(255, 255, 255, 255 * (1 - frameCounter / (fps / 2))));
         
-        if (++frameCounter > 1.f / frameRate.asSeconds()) {
+        if (++frameCounter > fps) {
             backgroundSprite.scale(-1.f,1.f);
             if (backgroundSprite.getScale().x != 1)
                 backgroundSprite.setPosition(screenDimensions.x, 0);
