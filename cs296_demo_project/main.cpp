@@ -108,6 +108,7 @@ int main(int, char const**)
             }
             
         }
+        
         if (rand() % 10 < 2) {
             Rock* rock;
             if (rand() % 3 < 1)
