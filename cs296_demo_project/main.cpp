@@ -18,20 +18,20 @@
 #include <SFML/Graphics.hpp>
 #include "ResourcePath.hpp"
 #include <iostream>
+#include <string>
+#include <vector>
 
 #include "GlobalConstants.hpp"
 #include "Rock.hpp"
 #include "MainAircraft.hpp"
-#include <vector>
 
 using namespace std;
 using namespace sf;
 
-
 int main(int, char const**)
 {
     // Create the main window
-    sf::RenderWindow window(sf::VideoMode(screenDimensions.x, screenDimensions.y), "SFML window");
+    sf::RenderWindow window(sf::VideoMode(screenDimensions.x, screenDimensions.y), "Oriental");
 
     // Set the Icon
     sf::Image icon;
@@ -46,14 +46,20 @@ int main(int, char const**)
     windowMask.setSize(sf::Vector2f(screenDimensions.x, screenDimensions.y));
     windowMask.setPosition(0, 0);
     
-    sf::CircleShape circle(2);
+    sf::Texture backgroundTexture;
+    if (!backgroundTexture.loadFromFile(resourcePath() + "background.png")) {
+        return EXIT_FAILURE;
+    }
+    sf::Sprite backgroundSprite;
+    backgroundSprite.setTexture(backgroundTexture);
+    
 
-//    sf::Font font;
-//    if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
-//        return EXIT_FAILURE;
-//    }
-//    sf::Text text("Hello SFML", font, 50);
-//    text.setColor(sf::Color::Black);
+    sf::Font font;
+    if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
+        return EXIT_FAILURE;
+    }
+    sf::Text text("Score: 0", font, 50);
+    text.setColor(sf::Color::Black);
 
     sf::Texture rockTexture;
     if (!rockTexture.loadFromFile(resourcePath() + "rock.png")) {
@@ -61,6 +67,13 @@ int main(int, char const**)
     }
     sf::Sprite rockSprite;
     rockSprite.setTexture(rockTexture);
+    
+    sf::Texture enemyTexture;
+    if (!enemyTexture.loadFromFile(resourcePath() + "enemy_aircraft.png")) {
+        return EXIT_FAILURE;
+    }
+    sf::Sprite enemySprite;
+    enemySprite.setTexture(enemyTexture);
     
     sf::Texture mainAircraftTexture;
     if (!mainAircraftTexture.loadFromFile(resourcePath() + "main_aircraft.png")) {
@@ -74,6 +87,9 @@ int main(int, char const**)
     
     sf::Event::MouseMoveEvent mousePosition;
 
+    
+    int score = 0;
+    int frameCounter = 0;
     // Start the game loop
     while (window.isOpen())
     {
@@ -93,7 +109,11 @@ int main(int, char const**)
             
         }
         if (rand() % 10 < 2) {
-            Rock* rock = new Rock(rockSprite, rand() % screenDimensions.x, rand() % screenDimensions.x, 2 + rand() % 10);
+            Rock* rock;
+            if (rand() % 3 < 1)
+                rock = new Rock(enemySprite, rand() % screenDimensions.x, rand() % screenDimensions.x, 1 + rand() % 8, false);
+            else
+                rock = new Rock(rockSprite, rand() % screenDimensions.x, rand() % screenDimensions.x, 3 + rand() % 10);
             rockArr.push_back(rock);
         }
         
@@ -102,6 +122,7 @@ int main(int, char const**)
 
         window.clear();
         window.draw(windowMask);
+        window.draw(backgroundSprite);
 
         bool willExplode = false;
         mainAircraft.setPosition(mousePosition.x, mousePosition.y);
@@ -109,20 +130,6 @@ int main(int, char const**)
         for (auto rock : rockArr) {
             rock->proceed(frameRate.asSeconds());
             window.draw(rock->getObject());
-            
-            // Debug rock position as seen on the screen
-            /*
-            auto size = rock->getSize();
-            size.x /= 2;
-            size.y /= 2;
-            auto rotatedSize = size;
-            auto angle = rock->getObject().getRotation() / 90 * M_PI_2;
-            rotatedSize.x = size.x * cos(angle) - size.y * sin(angle);
-            rotatedSize.y = size.x * sin(angle) + size.y * cos(angle);
-            
-            auto rockPosition = rock->getPosition() + rotatedSize;
-            circle.setPosition(rockPosition);
-            */
             
             if (mainAircraft.checkCollision(rock)) {
                 mainAircraft.explode();
@@ -135,6 +142,25 @@ int main(int, char const**)
             window.draw(mainAircraft);
         }
         
+        if (frameCounter <= 15)
+            backgroundSprite.setColor(sf::Color(255, 255, 255, 255 * frameCounter / 15.f));
+        else
+            backgroundSprite.setColor(sf::Color(255, 255, 255, 255 * (1 - frameCounter / 15.f)));
+        
+        if (++frameCounter > 1.f / frameRate.asSeconds()) {
+            backgroundSprite.scale(-1.f,1.f);
+            if (backgroundSprite.getScale().x != 1)
+                backgroundSprite.setPosition(screenDimensions.x, 0);
+            else
+                backgroundSprite.setPosition(0, 0);
+            frameCounter = 0;
+            
+            score++;
+            text.setString("Score: " + to_string(score));
+        }
+        
+    
+        window.draw(text);
         // Update the window
         window.display();
         

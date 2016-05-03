@@ -8,16 +8,19 @@
 
 #include "Rock.hpp"
 
-Rock::Rock(sf::Sprite object, int initX, int destX, float duration) {
+Rock::Rock(sf::Sprite object, int initX, int destX, float duration, bool rototed) {
     this->object = object;
     currentDuration = 0;
     existenceDuration = duration;
-    initialPosition = sf::Vector2f(initX, 0);
+    initialPosition = sf::Vector2f(initX, -getSize().y);
     currentPosition = initialPosition;
     finalPosition = sf::Vector2f(destX, screenDimensions.y);
     setObjectPosition(currentPosition);
     
-    rotationRate = 15 + rand() % 60;
+    if (rototed)
+        rotationRate = 15 + rand() % 60;
+    else
+        rotationRate = 0;
 }
 
 sf::Vector2f Rock::proceed(float seconds) {

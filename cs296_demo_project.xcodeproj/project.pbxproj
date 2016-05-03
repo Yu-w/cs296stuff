@@ -24,6 +24,7 @@
 		886C58991CD8725F00FB37A6 /* explosion_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 886C58951CD8725F00FB37A6 /* explosion_2.png */; };
 		886C589A1CD8725F00FB37A6 /* explosion_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 886C58961CD8725F00FB37A6 /* explosion_3.png */; };
 		886C589B1CD8725F00FB37A6 /* explosion_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 886C58971CD8725F00FB37A6 /* explosion_4.png */; };
+		889593EC1CD8F97B0010504A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 889593EB1CD8F97B0010504A /* background.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		886C58951CD8725F00FB37A6 /* explosion_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion_2.png; sourceTree = "<group>"; };
 		886C58961CD8725F00FB37A6 /* explosion_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion_3.png; sourceTree = "<group>"; };
 		886C58971CD8725F00FB37A6 /* explosion_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion_4.png; sourceTree = "<group>"; };
+		889593EB1CD8F97B0010504A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				886C58771CD837EE00FB37A6 /* icon.png */,
 				886C58881CD841F000FB37A6 /* rock.png */,
 				886C587E1CD83ADF00FB37A6 /* main_aircraft.png */,
+				889593EB1CD8F97B0010504A /* background.png */,
 				886C587F1CD83ADF00FB37A6 /* enemy_aircraft.png */,
 				886C58941CD8725F00FB37A6 /* explosion_1.png */,
 				886C58951CD8725F00FB37A6 /* explosion_2.png */,
@@ -194,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				886C58781CD837EE00FB37A6 /* icon.png in Resources */,
+				889593EC1CD8F97B0010504A /* background.png in Resources */,
 				886C58761CD837EE00FB37A6 /* sansation.ttf in Resources */,
 				886C58811CD83ADF00FB37A6 /* enemy_aircraft.png in Resources */,
 				886C58981CD8725F00FB37A6 /* explosion_1.png in Resources */,
@@ -373,6 +377,7 @@
 				886C587D1CD837EE00FB37A6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
