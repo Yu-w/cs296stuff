@@ -24,10 +24,11 @@ bool MainAricraft::checkCollision(Rock::Rock* rock) {
     size.x /= 2;
     size.y /= 2;
     auto rotatedSize = size;
-    auto sizeR = sqrt(size.x * size.x + size.y * size.y);
-    auto sizeTheta = atan2(size.y, size.x);
+    auto angle = rock->getObject().getRotation() / 90 * M_PI_2; // why divide by 90????
+    rotatedSize.x = size.x * cos(angle) - size.y * sin(angle);
+    rotatedSize.y = size.x * sin(angle) + size.y * cos(angle);
     
-    auto rockPosition = rock->getPosition() + size;
+    auto rockPosition = rock->getPosition() + rotatedSize;
     auto delta = rockPosition - currentPosition;
     std::cout << delta.x * delta.x + delta.y * delta.y << " ";
     std::cout << size.x * size.x + size.y * size.y << " ";

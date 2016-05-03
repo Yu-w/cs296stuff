@@ -45,6 +45,8 @@ int main(int, char const**)
     windowMask.setFillColor(sf::Color::White);
     windowMask.setSize(sf::Vector2f(screenDimensions.x, screenDimensions.y));
     windowMask.setPosition(0, 0);
+    
+    sf::CircleShape circle(2);
 
 //    sf::Font font;
 //    if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
@@ -71,8 +73,7 @@ int main(int, char const**)
     vector<Rock*> rockArr = vector<Rock*>();
     
     sf::Event::MouseMoveEvent mousePosition;
-    
-    bool foo = true;
+
     // Start the game loop
     while (window.isOpen())
     {
@@ -91,11 +92,10 @@ int main(int, char const**)
             }
             
         }
-        if (rand() % 10 < 1 && foo) {
-            Rock* rock = new Rock(rockSprite, rand() % screenDimensions.x, rand() % screenDimensions.x, 2000000 + rand() % 10);
+        if (rand() % 10 < 1) {
+            Rock* rock = new Rock(rockSprite, rand() % screenDimensions.x, rand() % screenDimensions.x, 2 + rand() % 10);
             rockArr.push_back(rock);
             cout << rock->getObject().getTextureRect().left << " " << rock->getObject().getTextureRect().top << endl;
-            foo = false;
         }
         
         if (event.type == sf::Event::MouseMoved)
@@ -111,6 +111,21 @@ int main(int, char const**)
         for (auto rock : rockArr) {
             rock->proceed(frameRate.asSeconds());
             window.draw(rock->getObject());
+            
+            // Debug rock position as seen on the screen
+            /*
+            auto size = rock->getSize();
+            size.x /= 2;
+            size.y /= 2;
+            auto rotatedSize = size;
+            auto angle = rock->getObject().getRotation() / 90 * M_PI_2;
+            rotatedSize.x = size.x * cos(angle) - size.y * sin(angle);
+            rotatedSize.y = size.x * sin(angle) + size.y * cos(angle);
+            
+            auto rockPosition = rock->getPosition() + rotatedSize;
+            circle.setPosition(rockPosition);
+            */
+            
             if (mainAircraft.checkCollision(rock)) {
                 mainAircraft.explode();
                 window.draw(mainAircraft);
