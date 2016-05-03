@@ -92,10 +92,9 @@ int main(int, char const**)
             }
             
         }
-        if (rand() % 10 < 1) {
+        if (rand() % 10 < 2) {
             Rock* rock = new Rock(rockSprite, rand() % screenDimensions.x, rand() % screenDimensions.x, 2 + rand() % 10);
             rockArr.push_back(rock);
-            cout << rock->getObject().getTextureRect().left << " " << rock->getObject().getTextureRect().top << endl;
         }
         
         if (event.type == sf::Event::MouseMoved)
@@ -107,7 +106,6 @@ int main(int, char const**)
         bool willExplode = false;
         mainAircraft.setPosition(mousePosition.x, mousePosition.y);
         
-        cout << endl;
         for (auto rock : rockArr) {
             rock->proceed(frameRate.asSeconds());
             window.draw(rock->getObject());
@@ -132,7 +130,6 @@ int main(int, char const**)
                 willExplode = true;
             }
         }
-        cout << endl;
         
         if (!willExplode) {
             window.draw(mainAircraft);

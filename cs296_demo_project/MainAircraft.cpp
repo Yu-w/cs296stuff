@@ -30,8 +30,6 @@ bool MainAricraft::checkCollision(Rock::Rock* rock) {
     
     auto rockPosition = rock->getPosition() + rotatedSize;
     auto delta = rockPosition - currentPosition;
-    std::cout << delta.x * delta.x + delta.y * delta.y << " ";
-    std::cout << size.x * size.x + size.y * size.y << " ";
     if (delta.x * delta.x + delta.y * delta.y < (size.x * size.x + size.y * size.y))
         return true;
     else return false;
