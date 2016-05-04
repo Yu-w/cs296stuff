@@ -32,6 +32,9 @@ private:
 public:
     
     Rock(Sprite object, int initX, int destX, float duration, bool rototed=true);
+    ~Rock();
+    Rock(Rock &other);
+
     Vector2f getCurrentPosition();
     Sprite getObject();
     Vector2f setObjectPosition(Vector2f position);

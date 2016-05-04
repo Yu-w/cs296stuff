@@ -20,6 +20,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
+#include <memory>
 
 #include "GlobalConstants.hpp"
 #include "Rock.hpp"
@@ -28,10 +30,26 @@
 using namespace std;
 using namespace sf;
 
+#include <boost/bind.hpp>
+#include <boost/coroutine/coroutine.hpp>
+
+// The coroutine type.
+typedef boost::coroutines::asymmetric_coroutine<int> coro;
+
+// The implementation routine of the coroutine.
+void xrange_impl(coro::push_type& yield, int limit)
+{
+    for(int i = 0; i < limit; i++) {
+        yield(i); // return results back to the caller
+    }
+}
+
 int main(int, char const**)
 {
     // Create the main window
     sf::RenderWindow window(sf::VideoMode(screenDimensions.x, screenDimensions.y), "Oriental");
+
+    sf::Clock clock;
 
     // Set the Icon
     sf::Image icon;
@@ -83,10 +101,15 @@ int main(int, char const**)
     MainAricraft mainAircraft;
     mainAircraft.setTexture(mainAircraftTexture);
     
-    vector<Rock*> rockArr = vector<Rock*>();
+    vector<shared_ptr<Rock>> rockArr = vector<shared_ptr<Rock>>();
+    
+    sf::Music music;
+    if (!music.openFromFile(resourcePath() + "main_music.ogg"))
+        return -1; // error
+    music.play();
     
     sf::Event::MouseMoveEvent mousePosition;
-
+    sf::Time deltaSeconds;
     
     int score = 0;
     int frameCounter = 0;
@@ -109,13 +132,23 @@ int main(int, char const**)
             
         }
         
-        if (rand() % 10 < 2) {
-            Rock* rock;
+        if (rand() % 10 < 1) {
+            unique_ptr<Rock> rock;
             if (rand() % 3 < 1)
-                rock = new Rock(enemySprite, rand() % screenDimensions.x, rand() % screenDimensions.x, 1 + rand() % 8, false);
+                rockArr.push_back(shared_ptr<Rock>(
+                            new Rock(
+                                enemySprite,
+                                rand() % screenDimensions.x,
+                                rand() % screenDimensions.x,
+                                1 + rand() % 8,
+                                false)));
             else
-                rock = new Rock(rockSprite, rand() % screenDimensions.x, rand() % screenDimensions.x, 3 + rand() % 10);
-            rockArr.push_back(rock);
+                rockArr.push_back(shared_ptr<Rock>(
+                            new Rock(
+                                rockSprite,
+                                rand() % screenDimensions.x,
+                                rand() % screenDimensions.x,
+                                3 + rand() % 10)));
         }
         
         if (event.type == sf::Event::MouseMoved)
@@ -128,11 +161,11 @@ int main(int, char const**)
         bool willExplode = false;
         mainAircraft.setPosition(mousePosition.x, mousePosition.y);
         
-        for (auto rock : rockArr) {
-            rock->proceed(frameRate.asSeconds());
+        for (auto& rock : rockArr) {
+            rock->proceed(deltaSeconds.asSeconds());
             window.draw(rock->getObject());
             
-            if (mainAircraft.checkCollision(rock)) {
+            if (mainAircraft.checkCollision(*rock)) {
                 mainAircraft.explode();
                 window.draw(mainAircraft);
                 willExplode = true;
@@ -159,8 +192,7 @@ int main(int, char const**)
             score++;
             text.setString("Score: " + to_string(score));
         }
-        
-    
+
         window.draw(text);
         // Update the window
         window.display();
@@ -169,7 +201,16 @@ int main(int, char const**)
             while(1);
         }
         
-        sleep(frameRate);
+        auto pend = remove_if(rockArr.begin(), rockArr.end(), [&window](shared_ptr<Rock>& rock) {
+            if (rock->getPosition().y > window.getSize().y + 10)
+                return true;
+            else
+                return false;
+        });
+        rockArr.resize(distance(rockArr.begin(), pend));
+        
+        deltaSeconds = clock.restart();
+        sleep(frameRate - deltaSeconds);
     }
 
     return EXIT_SUCCESS;

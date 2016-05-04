@@ -23,6 +23,20 @@ Rock::Rock(sf::Sprite object, int initX, int destX, float duration, bool rototed
         rotationRate = 0;
 }
 
+Rock::~Rock() {
+    
+}
+
+Rock::Rock(Rock &other) {
+    object = other.object;
+    currentDuration = other.currentDuration;
+    existenceDuration = other.existenceDuration;
+    initialPosition = other.initialPosition;
+    currentPosition = other.currentPosition;
+    finalPosition = other.finalPosition;
+    rotationRate = other.rotationRate;
+}
+
 sf::Vector2f Rock::proceed(float seconds) {
     currentDuration += seconds;
     auto newX = initialPosition.x + (finalPosition.x - initialPosition.x) * (currentDuration / existenceDuration);

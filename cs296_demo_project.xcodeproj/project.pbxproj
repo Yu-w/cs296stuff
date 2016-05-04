@@ -25,6 +25,13 @@
 		886C589A1CD8725F00FB37A6 /* explosion_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 886C58961CD8725F00FB37A6 /* explosion_3.png */; };
 		886C589B1CD8725F00FB37A6 /* explosion_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 886C58971CD8725F00FB37A6 /* explosion_4.png */; };
 		889593EC1CD8F97B0010504A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 889593EB1CD8F97B0010504A /* background.png */; };
+		8F8D547E1CD97FE000938BDA /* libboost_container.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F8D54791CD97FE000938BDA /* libboost_container.dylib */; };
+		8F8D547F1CD97FE000938BDA /* libboost_coroutine.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F8D547A1CD97FE000938BDA /* libboost_coroutine.dylib */; };
+		8F8D54801CD97FE000938BDA /* libboost_date_time.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F8D547B1CD97FE000938BDA /* libboost_date_time.dylib */; };
+		8F8D54811CD97FE000938BDA /* libboost_filesystem.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F8D547C1CD97FE000938BDA /* libboost_filesystem.dylib */; };
+		8F8D54821CD97FE000938BDA /* libboost_iostreams.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F8D547D1CD97FE000938BDA /* libboost_iostreams.dylib */; };
+		8F8D54841CD9803200938BDA /* libboost_system.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F8D54831CD9803200938BDA /* libboost_system.dylib */; };
+		8F8D54871CD98ADD00938BDA /* main_music.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 8F8D54861CD98ADD00938BDA /* main_music.ogg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +61,13 @@
 		886C58961CD8725F00FB37A6 /* explosion_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion_3.png; sourceTree = "<group>"; };
 		886C58971CD8725F00FB37A6 /* explosion_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion_4.png; sourceTree = "<group>"; };
 		889593EB1CD8F97B0010504A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		8F8D54791CD97FE000938BDA /* libboost_container.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_container.dylib; path = ../../../../usr/local/lib/libboost_container.dylib; sourceTree = "<group>"; };
+		8F8D547A1CD97FE000938BDA /* libboost_coroutine.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_coroutine.dylib; path = ../../../../usr/local/lib/libboost_coroutine.dylib; sourceTree = "<group>"; };
+		8F8D547B1CD97FE000938BDA /* libboost_date_time.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_date_time.dylib; path = ../../../../usr/local/lib/libboost_date_time.dylib; sourceTree = "<group>"; };
+		8F8D547C1CD97FE000938BDA /* libboost_filesystem.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_filesystem.dylib; path = ../../../../usr/local/lib/libboost_filesystem.dylib; sourceTree = "<group>"; };
+		8F8D547D1CD97FE000938BDA /* libboost_iostreams.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_iostreams.dylib; path = ../../../../usr/local/lib/libboost_iostreams.dylib; sourceTree = "<group>"; };
+		8F8D54831CD9803200938BDA /* libboost_system.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_system.dylib; path = ../../../../usr/local/lib/libboost_system.dylib; sourceTree = "<group>"; };
+		8F8D54861CD98ADD00938BDA /* main_music.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = main_music.ogg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +75,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F8D54801CD97FE000938BDA /* libboost_date_time.dylib in Frameworks */,
+				8F8D54811CD97FE000938BDA /* libboost_filesystem.dylib in Frameworks */,
+				8F8D547E1CD97FE000938BDA /* libboost_container.dylib in Frameworks */,
+				8F8D547F1CD97FE000938BDA /* libboost_coroutine.dylib in Frameworks */,
+				8F8D54821CD97FE000938BDA /* libboost_iostreams.dylib in Frameworks */,
+				8F8D54841CD9803200938BDA /* libboost_system.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +90,12 @@
 		886C585C1CD837EE00FB37A6 = {
 			isa = PBXGroup;
 			children = (
+				8F8D54831CD9803200938BDA /* libboost_system.dylib */,
+				8F8D54791CD97FE000938BDA /* libboost_container.dylib */,
+				8F8D547A1CD97FE000938BDA /* libboost_coroutine.dylib */,
+				8F8D547B1CD97FE000938BDA /* libboost_date_time.dylib */,
+				8F8D547C1CD97FE000938BDA /* libboost_filesystem.dylib */,
+				8F8D547D1CD97FE000938BDA /* libboost_iostreams.dylib */,
 				886C58681CD837EE00FB37A6 /* cs296_demo_project */,
 				886C58671CD837EE00FB37A6 /* Products */,
 			);
@@ -112,6 +138,7 @@
 		886C58701CD837EE00FB37A6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8F8D54861CD98ADD00938BDA /* main_music.ogg */,
 				886C58711CD837EE00FB37A6 /* cute_image.jpg */,
 				886C58731CD837EE00FB37A6 /* nice_music.ogg */,
 				886C58751CD837EE00FB37A6 /* sansation.ttf */,
@@ -206,6 +233,7 @@
 				886C58741CD837EE00FB37A6 /* nice_music.ogg in Resources */,
 				886C58721CD837EE00FB37A6 /* cute_image.jpg in Resources */,
 				886C58991CD8725F00FB37A6 /* explosion_2.png in Resources */,
+				8F8D54871CD98ADD00938BDA /* main_music.ogg in Resources */,
 				886C589B1CD8725F00FB37A6 /* explosion_4.png in Resources */,
 				886C58801CD83ADF00FB37A6 /* main_aircraft.png in Resources */,
 			);
@@ -343,6 +371,7 @@
 		886C587C1CD837EE00FB37A6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				INFOPLIST_FILE = "cs296_demo_project/cs296_demo_project-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -352,6 +381,7 @@
 		886C587D1CD837EE00FB37A6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				INFOPLIST_FILE = "cs296_demo_project/cs296_demo_project-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
