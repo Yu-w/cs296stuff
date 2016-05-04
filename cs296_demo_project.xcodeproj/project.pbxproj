@@ -74,6 +74,7 @@
 		8F8D548B1CD9AA6700938BDA /* Rotating.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Rotating.hpp; sourceTree = "<group>"; };
 		8F8D548C1CD9AAD800938BDA /* HasSprite.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HasSprite.hpp; sourceTree = "<group>"; };
 		8F8D548D1CD9AC6700938BDA /* Rock.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Rock.hpp; sourceTree = "<group>"; };
+		8F8D548E1CD9C4C900938BDA /* EnemyPlane.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EnemyPlane.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +125,7 @@
 				886C586E1CD837EE00FB37A6 /* main.cpp */,
 				8F8D548B1CD9AA6700938BDA /* Rotating.hpp */,
 				8F8D548D1CD9AC6700938BDA /* Rock.hpp */,
+				8F8D548E1CD9C4C900938BDA /* EnemyPlane.hpp */,
 				8F8D548A1CD9A53300938BDA /* Bullet.hpp */,
 				8F8D548C1CD9AAD800938BDA /* HasSprite.hpp */,
 				886C588B1CD85DBC00FB37A6 /* LinearFlying.hpp */,

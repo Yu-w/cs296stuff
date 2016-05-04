@@ -16,20 +16,39 @@ class Rotating : public virtual HasSprite {
 
 protected:
     float rotationRate;
+    float fixedDegree;
+    bool fixed;
 
 public:
     Rotating(sf::Sprite object)
         : HasSprite(object)
     {
-        
+        rotationRate = 0;
+        fixedDegree = 0;
+        fixed = false;
     }
     
-    void setRotation() {
-        rotationRate = 15 + rand() % 60;
+    Rotating(Rotating &other)
+    : HasSprite(other) {
+        rotationRate = other.rotationRate;
+    }
+    
+    void setFixedRotation(float degree) {
+        fixed = true;
+        fixedDegree = degree;
+    }
+    
+    void setRandomRotation() {
+        fixed = false;
+        rotationRate = 20 + rand() % 60;
     }
     
     sf::Vector2f proceed(float seconds) {
-        object.rotate(seconds * rotationRate);
+        if (fixed) {
+            object.setRotation(fixedDegree);
+        } else {
+            object.rotate(seconds * rotationRate);
+        }
         return sf::Vector2f(0, 0);
     }
 };

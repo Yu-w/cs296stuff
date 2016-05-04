@@ -36,7 +36,7 @@ public:
     sf::Vector2f getCurrentPosition();
     
     sf::Vector2f setObjectPosition(sf::Vector2f position);
-    sf::Vector2f proceed(float seconds);
+    virtual sf::Vector2f proceed(float seconds);
     sf::Vector2f getSize();
     sf::Vector2f getPosition();
 };

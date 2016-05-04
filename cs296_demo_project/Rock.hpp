@@ -20,7 +20,7 @@ public:
       Rotating(object),
       HasSprite(object)
     {
-        
+        setRandomRotation();
     }
     
     Rock(Rock& other)
@@ -30,7 +30,7 @@ public:
         
     }
     
-    sf::Vector2f proceed(float seconds) {
+    virtual sf::Vector2f proceed(float seconds) {
         auto pos = LinearFlying::proceed(seconds);
         Rotating::proceed(seconds);
         return pos;

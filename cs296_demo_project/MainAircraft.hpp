@@ -28,7 +28,7 @@ public:
     bool exploded = false;
     
     MainAricraft();
-    bool checkCollision(Rock::Rock& rock);
+    bool checkCollision(LinearFlying& rock);
     void explode();
     Vector2f getSize();
 };

@@ -16,7 +16,7 @@ MainAricraft::MainAricraft() {
     this->setTexture(texture);
 }
 
-bool MainAricraft::checkCollision(Rock::Rock& rock) {
+bool MainAricraft::checkCollision(LinearFlying& rock) {
     auto currentPosition = getPosition();
     currentPosition.x += getSize().x / 2;
     currentPosition.y += getSize().y / 2;
@@ -24,7 +24,7 @@ bool MainAricraft::checkCollision(Rock::Rock& rock) {
     size.x /= 2;
     size.y /= 2;
     auto rotatedSize = size;
-    auto angle = rock.getObject().getRotation() / 90 * M_PI_2; // why divide by 90????
+    auto angle = rock.getObject().getRotation() / 360 * M_PI * 2;
     rotatedSize.x = size.x * cos(angle) - size.y * sin(angle);
     rotatedSize.y = size.x * sin(angle) + size.y * cos(angle);
     

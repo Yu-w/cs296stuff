@@ -25,6 +25,7 @@
 
 #include "GlobalConstants.hpp"
 #include "Rock.hpp"
+#include "EnemyPlane.hpp"
 #include "MainAircraft.hpp"
 
 using namespace std;
@@ -101,7 +102,7 @@ int main(int, char const**)
     MainAricraft mainAircraft;
     mainAircraft.setTexture(mainAircraftTexture);
     
-    vector<shared_ptr<Rock>> rockArr = vector<shared_ptr<Rock>>();
+    vector<shared_ptr<LinearFlying>> rockArr;
     
     sf::SoundBuffer gunSoundBuffer;
     if (!gunSoundBuffer.loadFromFile(resourcePath() + "gun_sound.ogg"))
@@ -148,16 +149,15 @@ int main(int, char const**)
         }
         
         if (rand() % 10 < 1) {
-            unique_ptr<Rock> rock;
             if (rand() % 3 < 1)
-                rockArr.push_back(shared_ptr<Rock>(
-                            new Rock(
+                rockArr.push_back(shared_ptr<LinearFlying>(
+                            new EnemyPlane(
                                 enemySprite,
                                 rand() % screenDimensions.x,
                                 rand() % screenDimensions.x,
                                 1 + rand() % 8)));
             else
-                rockArr.push_back(shared_ptr<Rock>(
+                rockArr.push_back(shared_ptr<LinearFlying>(
                             new Rock(
                                 rockSprite,
                                 rand() % screenDimensions.x,
@@ -216,7 +216,7 @@ int main(int, char const**)
         }
         
         auto pend = remove_if(rockArr.begin(), rockArr.end(),
-            [&window](shared_ptr<Rock>& rock) {
+            [&window](shared_ptr<LinearFlying>& rock) {
                 return (rock->getPosition().y > window.getSize().y + 10);});
 
         rockArr.resize(distance(rockArr.begin(), pend));
