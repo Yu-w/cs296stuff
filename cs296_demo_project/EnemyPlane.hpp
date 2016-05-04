@@ -23,7 +23,6 @@ public:
     HasSprite(object)
     {
         auto degree = atan2(screenDimensions.y, destX - initX) * 360.0 / M_PI / 2 - 90;
-        std::cout << degree << std::endl;
         setFixedRotation(degree);
     }
     
