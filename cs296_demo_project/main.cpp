@@ -103,12 +103,21 @@ int main(int, char const**)
     
     vector<shared_ptr<Rock>> rockArr = vector<shared_ptr<Rock>>();
     
+    sf::SoundBuffer gunSoundBuffer;
+    if (!gunSoundBuffer.loadFromFile(resourcePath() + "gun_sound.ogg"))
+        return -1;
+    sf::Sound gunSound;
+    gunSound.setBuffer(gunSoundBuffer);
+    
     sf::Music music;
     if (!music.openFromFile(resourcePath() + "main_music.ogg"))
         return -1; // error
+    music.setLoop(true);
     music.play();
     
     sf::Event::MouseMoveEvent mousePosition;
+    mousePosition.x = screenDimensions.x / 2 - mainAircraft.getSize().x / 2;
+    mousePosition.y = screenDimensions.y - 200;
     sf::Time deltaSeconds;
     
     int score = 0;
@@ -116,6 +125,8 @@ int main(int, char const**)
     // Start the game loop
     while (window.isOpen())
     {
+        bool makeBullet = false;
+        
         // Process events
         sf::Event event;
         while (window.pollEvent(event))
@@ -130,6 +141,10 @@ int main(int, char const**)
                 window.close();
             }
             
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+                gunSound.play();
+                makeBullet = true;
+            }
         }
         
         if (rand() % 10 < 1) {
@@ -140,8 +155,7 @@ int main(int, char const**)
                                 enemySprite,
                                 rand() % screenDimensions.x,
                                 rand() % screenDimensions.x,
-                                1 + rand() % 8,
-                                false)));
+                                1 + rand() % 8)));
             else
                 rockArr.push_back(shared_ptr<Rock>(
                             new Rock(
@@ -201,12 +215,10 @@ int main(int, char const**)
             while(1);
         }
         
-        auto pend = remove_if(rockArr.begin(), rockArr.end(), [&window](shared_ptr<Rock>& rock) {
-            if (rock->getPosition().y > window.getSize().y + 10)
-                return true;
-            else
-                return false;
-        });
+        auto pend = remove_if(rockArr.begin(), rockArr.end(),
+            [&window](shared_ptr<Rock>& rock) {
+                return (rock->getPosition().y > window.getSize().y + 10);});
+
         rockArr.resize(distance(rockArr.begin(), pend));
         
         deltaSeconds = clock.restart();

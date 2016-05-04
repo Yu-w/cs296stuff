@@ -2,49 +2,43 @@
 //  Rock.hpp
 //  cs296_demo_project
 //
-//  Created by Wang Yu on 5/2/16.
+//  Created by Yifei Teng on 5/3/16.
 //  Copyright © 2016 Yu Wang. All rights reserved.
 //
 
-#ifndef Rock_hpp
-#define Rock_hpp
+#ifndef Rock_h
+#define Rock_h
 
-#include <SFML/Graphics.hpp>
-#include "ResourcePath.hpp"
-#include "GlobalConstants.hpp"
-#include <cmath>
+#include "LinearFlying.hpp"
+#include "Rotating.hpp"
 
-using namespace sf;
-
-class Rock {
-    
-private:
-    
-    const Vector2f size = Vector2f(44, 44);
-    float currentDuration;
-    float existenceDuration;
-    Sprite object;
-    Vector2f initialPosition;
-    Vector2f currentPosition;
-    Vector2f finalPosition;
-    int rotationRate;
-    
+class Rock : public virtual LinearFlying, public virtual Rotating {
 public:
-    
-    Rock(Sprite object, int initX, int destX, float duration, bool rototed=true);
-    ~Rock();
-    Rock(Rock &other);
 
-    Vector2f getCurrentPosition();
-    Sprite getObject();
-    Vector2f setObjectPosition(Vector2f position);
-    Vector2f proceed(float seconds);
-    Vector2f getSize();
-    Vector2f getPosition();
-    Rock* getPointer() {
-        return this;
+    Rock(sf::Sprite object, int initX, int destX, float duration)
+    : LinearFlying(object, initX, destX, duration),
+      Rotating(object),
+      HasSprite(object)
+    {
+        
     }
     
+    Rock(Rock& other)
+    : LinearFlying(other),
+      Rotating(other),
+      HasSprite(other) {
+        
+    }
+    
+    sf::Vector2f proceed(float seconds) {
+        auto pos = LinearFlying::proceed(seconds);
+        Rotating::proceed(seconds);
+        return pos;
+    }
+    
+    ~Rock() {
+        
+    }
 };
 
-#endif /* Rock_hpp */
+#endif /* Rock_h */

@@ -6,64 +6,53 @@
 //  Copyright © 2016 Yu Wang. All rights reserved.
 //
 
-#include "Rock.hpp"
+#include "LinearFlying.hpp"
 
-Rock::Rock(sf::Sprite object, int initX, int destX, float duration, bool rototed) {
-    this->object = object;
+LinearFlying::LinearFlying(sf::Sprite object, int initX, int destX, float duration)
+    : HasSprite(object)
+{
     currentDuration = 0;
     existenceDuration = duration;
     initialPosition = sf::Vector2f(initX, -getSize().y);
     currentPosition = initialPosition;
     finalPosition = sf::Vector2f(destX, screenDimensions.y);
     setObjectPosition(currentPosition);
-    
-    if (rototed)
-        rotationRate = 15 + rand() % 60;
-    else
-        rotationRate = 0;
 }
 
-Rock::~Rock() {
-    
-}
-
-Rock::Rock(Rock &other) {
-    object = other.object;
+LinearFlying::LinearFlying(LinearFlying &other)
+    : HasSprite(other)
+{
     currentDuration = other.currentDuration;
     existenceDuration = other.existenceDuration;
     initialPosition = other.initialPosition;
     currentPosition = other.currentPosition;
     finalPosition = other.finalPosition;
-    rotationRate = other.rotationRate;
 }
 
-sf::Vector2f Rock::proceed(float seconds) {
+LinearFlying::~LinearFlying() {
+}
+
+sf::Vector2f LinearFlying::proceed(float seconds) {
     currentDuration += seconds;
     auto newX = initialPosition.x + (finalPosition.x - initialPosition.x) * (currentDuration / existenceDuration);
     auto newY = initialPosition.y + (finalPosition.y - initialPosition.y) * (currentDuration / existenceDuration);
     currentPosition = sf::Vector2f(newX, newY);
     setObjectPosition(currentPosition);
-    object.rotate(frameRate.asSeconds() * rotationRate);
     return getCurrentPosition();
 }
 
-
-sf::Vector2f Rock::getCurrentPosition() {
+sf::Vector2f LinearFlying::getCurrentPosition() {
     return currentPosition;
 }
 
-sf::Sprite Rock::getObject() {
-    return object;
-}
-
-sf::Vector2f Rock::setObjectPosition(sf::Vector2f position) {
+sf::Vector2f LinearFlying::setObjectPosition(sf::Vector2f position) {
     object.setPosition(position);
 }
 
-sf::Vector2f Rock::getSize() {
+sf::Vector2f LinearFlying::getSize() {
     return size;
 }
 
-sf::Vector2f Rock::getPosition() {
+sf::Vector2f LinearFlying::getPosition() {
     return object.getPosition();
 }
