@@ -25,6 +25,7 @@
 		886C589A1CD8725F00FB37A6 /* explosion_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 886C58961CD8725F00FB37A6 /* explosion_3.png */; };
 		886C589B1CD8725F00FB37A6 /* explosion_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 886C58971CD8725F00FB37A6 /* explosion_4.png */; };
 		889593EC1CD8F97B0010504A /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 889593EB1CD8F97B0010504A /* background.png */; };
+		88E1D27A1CDAED5700AC2F7A /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 88E1D2791CDAED5700AC2F7A /* bullet.png */; };
 		8F8D547E1CD97FE000938BDA /* libboost_container.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F8D54791CD97FE000938BDA /* libboost_container.dylib */; };
 		8F8D547F1CD97FE000938BDA /* libboost_coroutine.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F8D547A1CD97FE000938BDA /* libboost_coroutine.dylib */; };
 		8F8D54801CD97FE000938BDA /* libboost_date_time.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F8D547B1CD97FE000938BDA /* libboost_date_time.dylib */; };
@@ -62,6 +63,7 @@
 		886C58961CD8725F00FB37A6 /* explosion_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion_3.png; sourceTree = "<group>"; };
 		886C58971CD8725F00FB37A6 /* explosion_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = explosion_4.png; sourceTree = "<group>"; };
 		889593EB1CD8F97B0010504A /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		88E1D2791CDAED5700AC2F7A /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
 		8F8D54791CD97FE000938BDA /* libboost_container.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_container.dylib; path = /usr/local/lib/libboost_container.dylib; sourceTree = "<absolute>"; };
 		8F8D547A1CD97FE000938BDA /* libboost_coroutine.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_coroutine.dylib; path = /usr/local/lib/libboost_coroutine.dylib; sourceTree = "<absolute>"; };
 		8F8D547B1CD97FE000938BDA /* libboost_date_time.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libboost_date_time.dylib; path = /usr/local/lib/libboost_date_time.dylib; sourceTree = "<absolute>"; };
@@ -150,6 +152,7 @@
 				886C58711CD837EE00FB37A6 /* cute_image.jpg */,
 				886C58731CD837EE00FB37A6 /* nice_music.ogg */,
 				886C58751CD837EE00FB37A6 /* sansation.ttf */,
+				88E1D2791CDAED5700AC2F7A /* bullet.png */,
 				886C58771CD837EE00FB37A6 /* icon.png */,
 				886C58881CD841F000FB37A6 /* rock.png */,
 				886C587E1CD83ADF00FB37A6 /* main_aircraft.png */,
@@ -251,6 +254,7 @@
 				886C58981CD8725F00FB37A6 /* explosion_1.png in Resources */,
 				886C58891CD841F000FB37A6 /* rock.png in Resources */,
 				886C589A1CD8725F00FB37A6 /* explosion_3.png in Resources */,
+				88E1D27A1CDAED5700AC2F7A /* bullet.png in Resources */,
 				886C58741CD837EE00FB37A6 /* nice_music.ogg in Resources */,
 				886C58721CD837EE00FB37A6 /* cute_image.jpg in Resources */,
 				886C58991CD8725F00FB37A6 /* explosion_2.png in Resources */,

@@ -32,6 +32,8 @@ public:
     
     virtual sf::Vector2f proceed(float seconds) {
         auto pos = LinearFlying::proceed(seconds);
+        if (this->getPosition().y > screenDimensions.y + 10)
+            goDie();
         Rotating::proceed(seconds);
         return pos;
     }

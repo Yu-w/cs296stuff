@@ -19,13 +19,15 @@ class LinearFlying : public virtual HasSprite {
     
 private:
     
-    const sf::Vector2f size = sf::Vector2f(44, 44);
+    sf::Vector2f size = sf::Vector2f(44, 44);
     float currentDuration;
     float existenceDuration;
 
     sf::Vector2f initialPosition;
     sf::Vector2f currentPosition;
     sf::Vector2f finalPosition;
+    
+    bool disappear = false;
 
 public:
     
@@ -33,12 +35,18 @@ public:
     LinearFlying(LinearFlying &other);
     ~LinearFlying();
 
+    void setSize(sf::Vector2f size);
+    void reverseDirection();
+    void setInitalYPosition(float y);
     sf::Vector2f getCurrentPosition();
-    
     sf::Vector2f setObjectPosition(sf::Vector2f position);
     virtual sf::Vector2f proceed(float seconds);
     sf::Vector2f getSize();
     sf::Vector2f getPosition();
+    bool checkCollision(LinearFlying& object);
+    
+    void goDie() { disappear = true; }
+    bool shouldDisappear() { return disappear; }
 };
 
 #endif /* LinearFlying_hpp */

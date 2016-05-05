@@ -26,7 +26,7 @@ public:
         setFixedRotation(degree);
     }
     
-    EnemyPlane(Rock& other)
+    EnemyPlane(EnemyPlane& other)
     : LinearFlying(other),
     Rotating(other),
     HasSprite(other) {

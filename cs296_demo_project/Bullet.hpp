@@ -9,13 +9,39 @@
 #ifndef Bullet_h
 #define Bullet_h
 
-#include "Rock.hpp"
+#include <iostream>
+#include "LinearFlying.hpp"
+#include "GlobalConstants.hpp"
 
 class Bullet : public virtual LinearFlying {
-    Bullet(sf::Sprite object, int initX, int destX, float duration) {
-        Rock(object, initX, destX, duration, false);
+    
+public:
+    
+    Bullet(sf::Sprite object, int initX, float y, int destX, float duration)
+    : LinearFlying(object, initX, destX, duration),
+      HasSprite(object)
+    {
+        reverseDirection();
+        setInitalYPosition(y);
+    }
+    
+    Bullet(Bullet& other)
+    : LinearFlying(other),
+      HasSprite(other) {
         
     }
+    
+    virtual sf::Vector2f proceed(float seconds) {
+        auto pos = LinearFlying::proceed(seconds);
+        if (pos.y <= 0) goDie();
+        return pos;
+    }
+    
+    ~Bullet() {
+        
+    }
+
+    
 };
 
 #endif /* Bullet_h */

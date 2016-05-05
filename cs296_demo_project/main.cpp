@@ -27,6 +27,7 @@
 #include "Rock.hpp"
 #include "EnemyPlane.hpp"
 #include "MainAircraft.hpp"
+#include "Bullet.hpp"
 
 using namespace std;
 using namespace sf;
@@ -98,11 +99,18 @@ int main(int, char const**)
     if (!mainAircraftTexture.loadFromFile(resourcePath() + "main_aircraft.png")) {
         return EXIT_FAILURE;
     }
-    
     MainAricraft mainAircraft;
     mainAircraft.setTexture(mainAircraftTexture);
     
+    sf::Texture bulletTexture;
+    if (!bulletTexture.loadFromFile(resourcePath() + "bullet.png")) {
+        return EXIT_FAILURE;
+    }
+    sf::Sprite bulletSprite;
+    bulletSprite.setTexture(bulletTexture);
+    
     vector<shared_ptr<LinearFlying>> rockArr;
+    vector<shared_ptr<LinearFlying>> bulletArr;
     
     sf::SoundBuffer gunSoundBuffer;
     if (!gunSoundBuffer.loadFromFile(resourcePath() + "gun_sound.ogg"))
@@ -123,6 +131,7 @@ int main(int, char const**)
     
     int score = 0;
     int frameCounter = 0;
+    
     // Start the game loop
     while (window.isOpen())
     {
@@ -175,9 +184,28 @@ int main(int, char const**)
         bool willExplode = false;
         mainAircraft.setPosition(mousePosition.x, mousePosition.y);
         
+        if (makeBullet)
+            bulletArr.push_back(shared_ptr<LinearFlying>(
+                         new Bullet(
+                             bulletSprite,
+                             mainAircraft.getPosition().x,
+                             mainAircraft.getPosition().y,
+                             mainAircraft.getPosition().x,
+                             3)));
+        
+        for (auto& bullet : bulletArr) {
+            bullet->proceed(deltaSeconds.asSeconds());
+            bullet->setSize(Vector2f(9, 21));
+            window.draw(bullet->getObject());
+        }
+        
         for (auto& rock : rockArr) {
             rock->proceed(deltaSeconds.asSeconds());
             window.draw(rock->getObject());
+            
+            for (auto& bullet : bulletArr) {
+                if (rock->checkCollision(*bullet)) rock->goDie();
+            }
             
             if (mainAircraft.checkCollision(*rock)) {
                 mainAircraft.explode();
@@ -217,9 +245,15 @@ int main(int, char const**)
         
         auto pend = remove_if(rockArr.begin(), rockArr.end(),
             [&window](shared_ptr<LinearFlying>& rock) {
-                return (rock->getPosition().y > window.getSize().y + 10);});
+                return (rock->shouldDisappear());});
 
         rockArr.resize(distance(rockArr.begin(), pend));
+        
+        auto bend = remove_if(bulletArr.begin(), bulletArr.end(),
+                              [&window](shared_ptr<LinearFlying>& bullet) {
+                                  return (bullet->shouldDisappear());});
+        
+        bulletArr.resize(distance(bulletArr.begin(), bend));
         
         deltaSeconds = clock.restart();
         sleep(frameRate - deltaSeconds);
