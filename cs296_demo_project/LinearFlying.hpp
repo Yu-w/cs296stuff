@@ -37,7 +37,8 @@ public:
 
     void setSize(sf::Vector2f size);
     void reverseDirection();
-    void setInitalYPosition(float y);
+    void setInitialYPosition(float y);
+    void setInitialXPosition(float x);
     sf::Vector2f getCurrentPosition();
     sf::Vector2f setObjectPosition(sf::Vector2f position);
     virtual sf::Vector2f proceed(float seconds);

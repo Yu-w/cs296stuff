@@ -131,6 +131,7 @@ int main(int, char const**)
     
     int score = 0;
     int frameCounter = 0;
+    bool canFireBullet = true; // Fire cooldown
     
     // Start the game loop
     while (window.isOpen())
@@ -152,8 +153,11 @@ int main(int, char const**)
             }
             
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
-                gunSound.play();
-                makeBullet = true;
+                if (canFireBullet) {
+                    makeBullet = true;
+                    gunSound.play();
+                }
+                canFireBullet = false;
             }
         }
         
@@ -197,16 +201,20 @@ int main(int, char const**)
             bullet->proceed(deltaSeconds.asSeconds());
             bullet->setSize(Vector2f(9, 21));
             window.draw(bullet->getObject());
+            
+            
+            for (auto& rock : rockArr) {
+                if (bullet->checkCollision(*rock)) {
+                    rock->goDie();
+                    bullet->goDie();
+                }
+            }
         }
         
         for (auto& rock : rockArr) {
             rock->proceed(deltaSeconds.asSeconds());
             window.draw(rock->getObject());
-            
-            for (auto& bullet : bulletArr) {
-                if (rock->checkCollision(*bullet)) rock->goDie();
-            }
-            
+
             if (mainAircraft.checkCollision(*rock)) {
                 mainAircraft.explode();
                 window.draw(mainAircraft);
@@ -218,11 +226,16 @@ int main(int, char const**)
             window.draw(mainAircraft);
         }
         
-        if (frameCounter <= fps / 2)
+        if (frameCounter <= fps / 2) {
             backgroundSprite.setColor(sf::Color(255, 255, 255, 255 * frameCounter / (fps / 2)));
-        else
+        } else
             backgroundSprite.setColor(sf::Color(255, 255, 255, 255 * (1 - frameCounter / (fps / 2))));
         
+        if (frameCounter == fps / 2) {
+            canFireBullet = true; // 1 second cool down
+        }
+        
+        // Every second
         if (++frameCounter > fps) {
             backgroundSprite.scale(-1.f,1.f);
             if (backgroundSprite.getScale().x != 1)
@@ -234,7 +247,7 @@ int main(int, char const**)
             score++;
             text.setString("Score: " + to_string(score));
         }
-
+        
         window.draw(text);
         // Update the window
         window.display();

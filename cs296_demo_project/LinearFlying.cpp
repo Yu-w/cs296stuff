@@ -42,8 +42,12 @@ void LinearFlying::reverseDirection() {
     finalPosition = initTempPos;
 }
 
-void LinearFlying::setInitalYPosition(float y) {
+void LinearFlying::setInitialYPosition(float y) {
     initialPosition.y = y;
+}
+
+void LinearFlying::setInitialXPosition(float x) {
+    initialPosition.x = x;
 }
 
 sf::Vector2f LinearFlying::proceed(float seconds) {

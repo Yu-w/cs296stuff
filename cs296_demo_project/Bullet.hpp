@@ -22,7 +22,8 @@ public:
       HasSprite(object)
     {
         reverseDirection();
-        setInitalYPosition(y);
+        setInitialYPosition(y);
+        setInitialXPosition(getPosition().x + 12);
     }
     
     Bullet(Bullet& other)
